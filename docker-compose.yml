@@ -23,6 +23,18 @@ services:
             - sail
         depends_on:
             - pgsql
+    pgadmin:
+        image: dpage/pgadmin4:latest
+        restart: always
+        environment:
+            PGADMIN_DEFAULT_EMAIL: '${PGADMIN_DEFAULT_EMAIL}'
+            PGADMIN_DEFAULT_PASSWORD: '${PGADMIN_DEFAULT_PASSWORD}'
+        ports:
+            - "${PGADMIN_EXTERNAL_PORT}:80"
+        volumes:
+            - pgadmin-data:/var/lib/pgadmin
+        networks:
+            - sail
     pgsql:
         image: 'postgres:13'
         ports:
@@ -46,3 +58,4 @@ networks:
 volumes:
     sailpgsql:
         driver: local
+    pgadmin-data:
