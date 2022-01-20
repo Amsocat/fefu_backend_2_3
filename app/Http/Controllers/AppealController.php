@@ -20,9 +20,11 @@ class AppealController extends Controller
     public function __invoke(Request $request)
     {
         $suggest_shown = $request->session()->get('suggest_shown');
-        if ($suggest_shown) {
+
+        if ($suggest_shown || $request->query('suggested', false)) {
             $request->session()->put("suggest_shown", false);
         }
+
         if ($request->isMethod('POST')) {
             $validated = $request->validate(AppealPostRequest::rules());
             $appeal = new Appeal();
@@ -35,6 +37,7 @@ class AppealController extends Controller
             $appeal->email = $validated['email'];
             $appeal->message = $validated['message'];
             $appeal->save();
+
             $request->session()->put("appealed", true);
             return redirect()->route('appeal');
         }
