@@ -20,6 +20,7 @@ class AppealController extends Controller
     public function __invoke(Request $request)
     {
         $suggest_shown = $request->session()->get('suggest_shown');
+
         if ($suggest_shown || $request->query('suggested', false)) {
             $request->session()->put("suggest_shown", false);
         }
