@@ -38,6 +38,6 @@ class RedirectFromOldSlug
         if ($newSlug !== null)
             return redirect($tail);
 
-        return $next($request);
+      return $next($request);
     }
 }
