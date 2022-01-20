@@ -20,6 +20,7 @@
         }
     </style>
     @includeWhen(session('suggest'), 'components.suggest_appeal')
+    @include('layouts.app')
 </head>
 <body class="antialiased">
     <a href="{{route('news_list')}}">Новости</a>
